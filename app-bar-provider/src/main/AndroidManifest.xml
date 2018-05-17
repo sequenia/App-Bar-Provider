@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sequenia.app_bar_provider" />
+<manifest package="com.sequenia.app_bar_provider" />
