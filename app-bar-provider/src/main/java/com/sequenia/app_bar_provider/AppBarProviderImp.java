@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 
 
 /**
@@ -22,14 +22,14 @@ public class AppBarProviderImp {
 
     private AppBarLayout appBar;
     private Toolbar toolbar;
-    private LinearLayout collapsingContent;
+    private ViewGroup collapsingContent;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
-    public AppBarProviderImp(View parent) {
-        appBar = parent.findViewById(R.id.app_bar);
-        toolbar = parent.findViewById(R.id.toolbar);
-        collapsingToolbarLayout = parent.findViewById(R.id.collapsing_toolbar);
-        collapsingContent = parent.findViewById(R.id.collapsing_content);
+    public AppBarProviderImp(AppBarViews appBarViews) {
+        appBar = appBarViews.getAppBar();
+        toolbar = appBarViews.getToolbar();
+        collapsingToolbarLayout = appBarViews.getCollapsingToolbarLayout();
+        collapsingContent = appBarViews.getCollapsingContent();
         toolbar.setContentInsetStartWithNavigation(0);
     }
 
