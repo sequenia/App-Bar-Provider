@@ -33,8 +33,8 @@ public interface AppBarProvider {
         getAppBarProviderImp().setToolbarVisibility(visibility);
     }
 
-    default void setNeedScrollAppBar(boolean needScroll) {
-        getAppBarProviderImp().setNeedScrollAppBar(needScroll);
+    default void setNeedScrollAppBar(boolean needScroll, int flags) {
+        getAppBarProviderImp().setNeedScrollAppBar(needScroll, flags);
     }
 
     default void setBackButtonVisibility(boolean visibility) {

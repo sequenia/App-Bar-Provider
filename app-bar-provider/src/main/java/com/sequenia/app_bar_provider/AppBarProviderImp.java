@@ -68,14 +68,13 @@ public class AppBarProviderImp {
         }
     }
 
-    void setNeedScrollAppBar(boolean needScroll) {
+    void setNeedScrollAppBar(boolean needScroll, int flags) {
         if (toolbar != null && collapsingToolbarLayout != null) {
             AppBarLayout.LayoutParams params =
                     (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
-            int flags = !needScroll ? 0
-                    : AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
-                    AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP;
-            params.setScrollFlags(flags);
+            params.setScrollFlags(!needScroll ?
+                    0 : AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | flags
+            );
             collapsingToolbarLayout.setLayoutParams(params);
         }
     }
