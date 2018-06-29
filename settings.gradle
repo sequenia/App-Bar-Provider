@@ -1,1 +1,1 @@
-include ':app-bar-provider'
+include ':app-bar-provider', ':stub-appcompat'
