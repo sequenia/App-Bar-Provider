@@ -13,6 +13,16 @@ public interface AppBarProvider {
     LayoutInflater getLayoutInflater();
     ActionBar getSupportActionBar();
 
+    default void setAppBarSettings(AppBarSettings settings) {
+        if (settings != null) {
+            this.setBackButtonVisibility(settings.isBackButtonVisible());
+            this.setCustomToolbarView(settings.getCustomToolbarLayout());
+            this.setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags());
+            this.setToolbarVisibility(settings.setToolbarVisibility());
+            this.setAppBarVisibility(settings.setAppBarVisibility());
+        }
+    }
+
     default View inflateViewForAppBar(int layoutRes) {
         return getAppBarProviderImp().inflateViewForAppBar(layoutRes, getLayoutInflater());
     }
