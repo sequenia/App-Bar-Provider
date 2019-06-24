@@ -1,4 +1,4 @@
-package android.support.design.widget;
+package com.google.android.material.appbar;
 
 import android.view.ViewGroup;
 
