@@ -1,6 +1,6 @@
 package com.sequenia.app_bar_provider;
 
-import android.support.v7.app.ActionBar;
+import androidx.appcompat.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 
