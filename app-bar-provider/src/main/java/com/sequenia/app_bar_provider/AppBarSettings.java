@@ -1,6 +1,14 @@
 package com.sequenia.app_bar_provider;
 
 public interface AppBarSettings {
+
+    /**
+     * Получить ресурс изображения для кнопки home
+     *
+     * @return ресурс изображения
+     */
+    int getHomeAsUpIndicatorRes();
+
     default int getFlags() {
         return 0;
     }
