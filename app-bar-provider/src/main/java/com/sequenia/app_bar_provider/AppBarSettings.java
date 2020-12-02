@@ -7,7 +7,9 @@ public interface AppBarSettings {
      *
      * @return ресурс изображения
      */
-    int getHomeAsUpIndicatorRes();
+    default Integer getHomeAsUpIndicatorRes() {
+        return null;
+    }
 
     default int getFlags() {
         return 0;

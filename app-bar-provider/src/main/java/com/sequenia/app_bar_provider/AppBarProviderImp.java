@@ -1,5 +1,8 @@
 package com.sequenia.app_bar_provider;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,11 +109,38 @@ public class AppBarProviderImp {
         appBar.removeView(view);
     }
 
-    void setHomeAsUpIndicator(ActionBar actionBar, int drawableRes) {
-        if (actionBar == null) {
+    void setHomeAsUpIndicator(ActionBar actionBar, Integer drawableRes) {
+        if (actionBar == null || appBar == null) {
+            return;
+        }
+
+        if (drawableRes == null) {
+            drawableRes = getDefaultHomeAsUpIndicator();
+        }
+
+        // по каким-то причинам не удалось достать иконку по умолчанию
+        if (drawableRes == null) {
             return;
         }
 
         actionBar.setHomeAsUpIndicator(drawableRes);
+    }
+
+    private Integer getDefaultHomeAsUpIndicator() {
+        Context context = appBar.getContext();
+
+        if (context == null) {
+            return null;
+        }
+
+        Resources.Theme theme = context.getTheme();
+
+        if (theme == null) {
+            return null;
+        }
+
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(android.R.attr.homeAsUpIndicator, typedValue, true);
+        return typedValue.resourceId;
     }
 }
