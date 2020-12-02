@@ -1,5 +1,6 @@
 package com.google.android.material.appbar;
 
+import android.content.Context;
 import android.view.ViewGroup;
 
 public class AppBarLayout extends ViewGroup {
@@ -10,5 +11,9 @@ public class AppBarLayout extends ViewGroup {
         public void setScrollFlags(int flags) {
             throw new RuntimeException("Stub!");
         }
+    }
+
+    public final Context getContext() {
+        throw new RuntimeException("Stub!");
     }
 }

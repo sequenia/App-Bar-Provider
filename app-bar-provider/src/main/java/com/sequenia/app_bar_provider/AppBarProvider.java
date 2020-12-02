@@ -1,8 +1,9 @@
 package com.sequenia.app_bar_provider;
 
-import androidx.appcompat.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBar;
 
 /**
  * Created by Ringo on 06.02.2018.
@@ -10,17 +11,22 @@ import android.view.View;
  */
 public interface AppBarProvider {
     AppBarProviderImp getAppBarProviderImp();
+
     LayoutInflater getLayoutInflater();
+
     ActionBar getSupportActionBar();
 
     default void setAppBarSettings(AppBarSettings settings) {
-        if (settings != null) {
-            this.setBackButtonVisibility(settings.isBackButtonVisible());
-            this.setCustomToolbarView(settings.getCustomToolbarLayout());
-            this.setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags());
-            this.setToolbarVisibility(settings.setToolbarVisibility());
-            this.setAppBarVisibility(settings.setAppBarVisibility());
+        if (settings == null) {
+            return;
         }
+
+        this.setBackButtonVisibility(settings.isBackButtonVisible());
+        this.setCustomToolbarView(settings.getCustomToolbarLayout());
+        this.setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags());
+        this.setToolbarVisibility(settings.setToolbarVisibility());
+        this.setAppBarVisibility(settings.setAppBarVisibility());
+        this.setHomeAsUpIndicator(settings.getHomeAsUpIndicatorRes());
     }
 
     default View inflateViewForAppBar(int layoutRes) {
@@ -62,5 +68,9 @@ public interface AppBarProvider {
 
     default void removeViewFromCollapsingView(View view) {
         getAppBarProviderImp().removeViewFromCollapsingView(view);
+    }
+
+    default void setHomeAsUpIndicator(int drawableRes) {
+        getAppBarProviderImp().setHomeAsUpIndicator(getSupportActionBar(), drawableRes);
     }
 }
