@@ -70,7 +70,7 @@ public interface AppBarProvider {
         getAppBarProviderImp().removeViewFromCollapsingView(view);
     }
 
-    default void setHomeAsUpIndicator(int drawableRes) {
+    default void setHomeAsUpIndicator(Integer drawableRes) {
         getAppBarProviderImp().setHomeAsUpIndicator(getSupportActionBar(), drawableRes);
     }
 }
