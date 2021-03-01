@@ -5,8 +5,8 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 ext {
-    targetVersionCode = 7
-    targetVersionName = "1.1.1"
+    targetVersionCode = 8
+    targetVersionName = "1.1.2"
 }
 
 dependencies {
