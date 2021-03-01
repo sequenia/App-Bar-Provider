@@ -27,11 +27,11 @@ public interface AppBarSettings {
         return false;
     }
 
-    default boolean setToolbarVisibility() {
+    default boolean isToolbarVisibility() {
         return true;
     }
 
-    default boolean setAppBarVisibility() {
+    default boolean isAppBarVisibility() {
         return true;
     }
 }
