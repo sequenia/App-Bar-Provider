@@ -24,8 +24,8 @@ public interface AppBarProvider {
         this.setBackButtonVisibility(settings.isBackButtonVisible());
         this.setCustomToolbarView(settings.getCustomToolbarLayout());
         this.setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags());
-        this.setToolbarVisibility(settings.setToolbarVisibility());
-        this.setAppBarVisibility(settings.setAppBarVisibility());
+        this.setToolbarVisibility(settings.isToolbarVisibility());
+        this.setAppBarVisibility(settings.isAppBarVisibility());
         this.setHomeAsUpIndicator(settings.getHomeAsUpIndicatorRes());
     }
 
