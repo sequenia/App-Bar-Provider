@@ -10,7 +10,7 @@ import androidx.core.view.updateLayoutParams
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
-class AppBarProviderImp(
+open class AppBarProviderImp(
     appBarViews: AppBarViews,
 ) {
     private val appBar: AppBarLayout?
