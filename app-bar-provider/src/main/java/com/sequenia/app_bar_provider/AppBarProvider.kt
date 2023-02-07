@@ -15,15 +15,15 @@ interface AppBarProvider {
     fun setAppBarSettings(settings: AppBarSettings?) {
         if (settings == null) return
         setBackButtonVisibility(settings.isBackButtonVisible())
-        setCustomToolbarView(settings.getCustomToolbarLayout())
+        createAndSetCustomToolbarView(settings.getCustomToolbarLayout())
         setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags())
         setToolbarVisibility(settings.setToolbarVisibility())
         setAppBarVisibility(settings.setAppBarVisibility())
-        setHomeAsUpIndicator(settings.getHomeAsUpIndicatorRes())
+        setHomeAsUpIndicator(settings.getHomeAsUpIndicatorResourceId())
     }
 
-    fun inflateViewForAppBar(layoutRes: Int): View? {
-        return getAppBarProviderImp().inflateViewForAppBar(layoutRes, getLayoutInflater())
+    fun inflateViewForAppBar(layoutResourceId: Int): View? {
+        return getAppBarProviderImp().inflateViewForAppBar(layoutResourceId, getLayoutInflater())
     }
 
     fun addViewToAppBar(view: View) {
@@ -50,9 +50,9 @@ interface AppBarProvider {
         getAppBarProviderImp().setBackButtonVisibility(visibility, getSupportActionBar())
     }
 
-    fun setCustomToolbarView(layoutRes: Int): View? {
-        return getAppBarProviderImp().setCustomToolbarView(
-            layoutRes,
+    fun createAndSetCustomToolbarView(layoutResource: Int): View? {
+        return getAppBarProviderImp().createAndSetCustomToolbarView(
+            layoutResource,
             getSupportActionBar(), getLayoutInflater()
         )
     }
@@ -65,8 +65,8 @@ interface AppBarProvider {
         getAppBarProviderImp().removeViewFromCollapsingView(view)
     }
 
-    fun setHomeAsUpIndicator(drawableRes: Int) {
-        getAppBarProviderImp().setHomeAsUpIndicator(getSupportActionBar(), drawableRes)
+    fun setHomeAsUpIndicator(drawableResource: Int) {
+        getAppBarProviderImp().setHomeAsUpIndicator(getSupportActionBar(), drawableResource)
     }
 
     fun setToolbarTitle(title: String) {
