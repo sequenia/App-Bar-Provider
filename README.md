@@ -6,6 +6,8 @@
 
 ## Подключение
 
+В `build.gradle` проекта
+
 ```
 allprojects {
     repositories {
@@ -13,68 +15,78 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+```
 
+В `build.gradle` приложения
+
+```
 dependencies {
-    implementation 'com.github.sequenia:App-Bar-Provider:vX.X.X'
+    implementation 'com.github.sequenia:App-Bar-Provider:X.X.X'
 }
 ```
 
 ## Использование
 
-Пример разметки AppBar'а
+**Пример простой разметки AppBar'а:**
 
-```
-<com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+```  
+<com.google.android.material.appbar.AppBarLayout  
+	android:id="@+id/app_bar" 
+	android:layout_width="match_parent"  
+	android:layout_height="wrap_content">   
+	
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:navigationIcon="@drawable/ic_back" />  
 
-    <com.google.android.material.appbar.CollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+</com.google.android.material.appbar.AppBarLayout>
+```  
 
-        <LinearLayout
-            android:id="@+id/collapsing_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+**Пример разметки AppBar'а c CollapsingToolbarLayout:**
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+```  
+<com.google.android.material.appbar.AppBarLayout  
+	android:id="@+id/app_bar" 
+	android:layout_width="match_parent"  
+	android:layout_height="wrap_content">
 
-        </LinearLayout>
+	<com.google.android.material.appbar.CollapsingToolbarLayout  
+		android:id="@+id/collapsing_toolbar" 
+		android:layout_width="match_parent" 
+		android:layout_height="wrap_content">  
 
-    </com.google.android.material.appbar.CollapsingToolbarLayout>
+			<LinearLayout
+				android:id="@+id/collapsing_content"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				app:layout_collapseMode="parallax">  
+ 
+					<androidx.appcompat.widget.AppCompatImageView
+						 android:id="@+id/cover_image"
+						 android:layout_width="match_parent"
+						 android:layout_height="260dp"
+						 android:layout_marginTop="24dp" />  
+ 
+			</LinearLayout>
+			
+	</com.google.android.material.appbar.CollapsingToolbarLayout>
+	
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_collapseMode="pin"
+		app:navigationIcon="@drawable/ic_back" />  
 
 </com.google.android.material.appbar.AppBarLayout>
 ```
 
-В activity необходимо реализовать два интерфейса.
+**AppBarProvider:**
 
-```
-public interface AppBarViews {
-    AppBarLayout getAppBar();
-    Toolbar getToolbar();
-    ViewGroup getCollapsingContent();
-    CollapsingToolbarLayout getCollapsingToolbarLayout();
-}
-```
-
-Интерфейс предоставляет методы для обращения к view AppBar'а.
-Реализацию интерфейса необходимо передать в констуктор AppBarProviderImp. 
-
-```
-appBarProviderImp = new AppBarProviderImp(AppBarSettings);
-```
-
-```
-AppBarProvider
-```
-
-Позволяет насроить AppBar:
+`AppBarProvider` позволяет настроить AppBar:
 - показать/скрыть AppBar
 - показать/скрыть toolbar
 - показать/скрыть кнопку назад
@@ -85,11 +97,9 @@ AppBarProvider
 
 Для задания этих настроек необходимо реализовать интерфейс во fragment'е, который передает настройки вида в AppBar.
 
-```
-AppBarSettings
-```
- 
-Интерфейс имеет настройки поумолчанию:
+**AppBarSettings:**
+
+Реализация интерфейса по-умолчанию `DefaultAppBarSettings` имеет настройки:
 - показать AppBar
 - показать toolbar
 - скрыть кнопку назад
@@ -97,35 +107,62 @@ AppBarSettings
 - не использовать NeedScroll AppBar
 - нет view в CollapsingView
 
-Задание toolbar
+**Пример использования с помощью вспомогательного класса:**
 
 ```
-setSupportActionBar(appBarProviderImp.getToolbar());
-```
+class DefaultAppBarView(
+    appBarSettings: DefaultAppBarSettings = DefaultAppBarSettings(),
+    fragment: Fragment,
+    view: View,
+) : AppBarProvider {
 
-Получение доступа к интерфейсу AppBar'а из fragment'а
+    private val appBarProviderImp: AppBarProviderImp
+    private val layoutInflater = fragment.layoutInflater
+    private val actionBar: ActionBar
 
-```
-protected AppBarProvider appBarProvider;
+    init {
+        val activity = fragment.requireActivity() as AppCompatActivity
+        val appBarViews = createAppBarViews(view)
 
-@Override
-public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof AppBarProvider) {
-        appBarProvider = (AppBarProvider) context;
-    } else {
-        throw new RuntimeException("Activity must implement AppBarProvider");
+        activity.setSupportActionBar(appBarViews.getToolbar())
+        actionBar = activity.supportActionBar!!
+
+        appBarProviderImp = AppBarProviderImp(appBarViews)
+
+        setAppBarSettings(appBarSettings)
+
+        appBarViews.getToolbar()
+            ?.setNavigationOnClickListener { fragment.findNavController().popBackStack() }
+    }
+
+    override fun getAppBarProviderImp() = appBarProviderImp
+
+    override fun getLayoutInflater() = layoutInflater
+
+    override fun getSupportActionBar() = actionBar
+
+    private fun createAppBarViews(view: View): AppBarViews {
+        return object : AppBarViews {
+            override fun getAppBar() = view as AppBarLayout
+
+            override fun getToolbar() = view.findViewById<Toolbar>(R.id.toolbar)
+
+            override fun getCollapsingContent() = null
+
+            override fun getCollapsingToolbarLayout() =
+                view.findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
+
+        }
     }
 }
 ```
 
-Пример задания заголовка экрана
+Класс `DefaultAppBarView` необходимо инициализировать в методе `onViewCreated` fragment'а
+
 ```
-@Override
-public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    appBarProvider.setAppBarSettings(this);
-    ((TextView) appBarProvider.setCustomToolbarView(R.layout.view_tollbar_title))
-                    .setText(getTitle());
+private fun initAppBar() {
+	appBarView = DefaultAppBarView(fragment = this, view = binding.appBarView.root)
+	val toolbarView = appBarView?.setCustomToolbarView(R.layout.custom_toolbar)
+	toolbarBinding = CustomToolbarBinding.bind(toolbarView!!)
 }
-```
+ ```
