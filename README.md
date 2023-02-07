@@ -31,15 +31,15 @@ dependencies {
 
 ```  
 <com.google.android.material.appbar.AppBarLayout  
-	android:id="@+id/app_bar" 
-	android:layout_width="match_parent"  
-	android:layout_height="wrap_content">   
+    android:id="@+id/app_bar" 
+    android:layout_width="match_parent"  
+    android:layout_height="wrap_content">   
 	
-	<androidx.appcompat.widget.Toolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		app:navigationIcon="@drawable/ic_back" />  
+    <androidx.appcompat.widget.Toolbar
+	android:id="@+id/toolbar"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:navigationIcon="@drawable/ic_back" />  
 
 </com.google.android.material.appbar.AppBarLayout>
 ```  
@@ -48,38 +48,38 @@ dependencies {
 
 ```  
 <com.google.android.material.appbar.AppBarLayout  
-	android:id="@+id/app_bar" 
-	android:layout_width="match_parent"  
-	android:layout_height="wrap_content">
+    android:id="@+id/app_bar" 
+    android:layout_width="match_parent"  
+    android:layout_height="wrap_content">
 
-	<com.google.android.material.appbar.CollapsingToolbarLayout  
-		android:id="@+id/collapsing_toolbar" 
-		android:layout_width="match_parent" 
-		android:layout_height="wrap_content">  
+    <com.google.android.material.appbar.CollapsingToolbarLayout  
+	android:id="@+id/collapsing_toolbar" 
+	android:layout_width="match_parent" 
+	android:layout_height="wrap_content">  
 
-			<LinearLayout
-				android:id="@+id/collapsing_content"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				app:layout_collapseMode="parallax">  
+	<LinearLayout
+	    android:id="@+id/collapsing_content"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    app:layout_collapseMode="parallax">  
  
-					<androidx.appcompat.widget.AppCompatImageView
-						 android:id="@+id/cover_image"
-						 android:layout_width="match_parent"
-						 android:layout_height="260dp"
-						 android:layout_marginTop="24dp" />  
- 
-			</LinearLayout>
-			
-	</com.google.android.material.appbar.CollapsingToolbarLayout>
-	
-	<androidx.appcompat.widget.Toolbar
-		android:id="@+id/toolbar"
+	    <androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/cover_image"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		app:layout_collapseMode="pin"
-		app:navigationIcon="@drawable/ic_back" />  
+		android:layout_height="260dp"
+		android:layout_marginTop="24dp" />  
+ 
+	</LinearLayout>
+			
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+	
+    <androidx.appcompat.widget.Toolbar
+	android:id="@+id/toolbar"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:layout_collapseMode="pin"
+	app:navigationIcon="@drawable/ic_back" />  
 
 </com.google.android.material.appbar.AppBarLayout>
 ```
@@ -161,8 +161,8 @@ class DefaultAppBarView(
 
 ```
 private fun initAppBar() {
-	appBarView = DefaultAppBarView(fragment = this, view = binding.appBarView.root)
-	val toolbarView = appBarView?.setCustomToolbarView(R.layout.custom_toolbar)
-	toolbarBinding = CustomToolbarBinding.bind(toolbarView!!)
+    appBarView = DefaultAppBarView(fragment = this, view = binding.appBarView.root)
+    val toolbarView = appBarView?.setCustomToolbarView(R.layout.custom_toolbar)
+    toolbarBinding = CustomToolbarBinding.bind(toolbarView!!)
 }
  ```
