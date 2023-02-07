@@ -17,8 +17,8 @@ interface AppBarProvider {
         setBackButtonVisibility(settings.isBackButtonVisible())
         setCustomToolbarView(settings.getCustomToolbarLayout())
         setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags())
-        setToolbarVisibility(settings.isToolbarVisibility())
-        setAppBarVisibility(settings.isAppBarVisibility())
+        setToolbarVisibility(settings.setToolbarVisibility())
+        setAppBarVisibility(settings.setAppBarVisibility())
         setHomeAsUpIndicator(settings.getHomeAsUpIndicatorRes())
     }
 
