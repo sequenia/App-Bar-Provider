@@ -34,12 +34,12 @@ open class AppBarProviderImp(
         collapsingContent?.removeView(view)
     }
 
-    fun setCustomToolbarView(
-        layoutRes: Int,
+    fun createAndSetCustomToolbarView(
+        layoutResource: Int,
         actionBar: ActionBar,
         inflater: LayoutInflater,
     ): View? {
-        if (layoutRes == -1) {
+        if (layoutResource == -1) {
             actionBar.customView = null
             return null
         }
@@ -49,7 +49,7 @@ open class AppBarProviderImp(
             ActionBar.LayoutParams.MATCH_PARENT
         )
 
-        val customView = inflater.inflate(layoutRes, null)
+        val customView = inflater.inflate(layoutResource, null)
         actionBar.setCustomView(customView, params)
 
         return actionBar.customView
@@ -76,8 +76,8 @@ open class AppBarProviderImp(
         appBar?.isVisible = isVisible
     }
 
-    fun inflateViewForAppBar(layoutRes: Int, inflater: LayoutInflater): View? {
-        return inflater.inflate(layoutRes, appBar, false)
+    fun inflateViewForAppBar(layoutResource: Int, inflater: LayoutInflater): View? {
+        return inflater.inflate(layoutResource, appBar, false)
     }
 
     fun addViewToAppBar(view: View) {
@@ -88,8 +88,8 @@ open class AppBarProviderImp(
         appBar?.removeView(view)
     }
 
-    fun setHomeAsUpIndicator(actionBar: ActionBar, drawableRes: Int) {
-        actionBar.setHomeAsUpIndicator(drawableRes)
+    fun setHomeAsUpIndicator(actionBar: ActionBar, drawableResource: Int) {
+        actionBar.setHomeAsUpIndicator(drawableResource)
     }
 
     fun setToolbarTitle(title: String) {
