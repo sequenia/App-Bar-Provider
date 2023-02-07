@@ -1,5 +1,6 @@
 package com.sequenia.app_bar_provider
 
+@JvmDefaultWithoutCompatibility
 interface AppBarSettings {
     /**
      * Если передаватьь 0, то используется изображение по умолчанию из темы
@@ -14,9 +15,9 @@ interface AppBarSettings {
 
     fun needScrollToolbar(): Boolean = false
 
-    fun isToolbarVisibility(): Boolean = true
+    fun setToolbarVisibility(): Boolean = true
 
-    fun isAppBarVisibility(): Boolean = true
+    fun setAppBarVisibility(): Boolean = true
 
     fun getCustomToolbarLayout(): Int = -1
 }
