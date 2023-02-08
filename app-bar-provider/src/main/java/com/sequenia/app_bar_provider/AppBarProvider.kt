@@ -19,7 +19,6 @@ interface AppBarProvider {
         setNeedScrollAppBar(settings.needScrollToolbar(), settings.getFlags())
         setToolbarVisibility(settings.setToolbarVisibility())
         setAppBarVisibility(settings.setAppBarVisibility())
-        setHomeAsUpIndicator(settings.getHomeAsUpIndicatorResourceId())
     }
 
     fun inflateViewForAppBar(layoutResourceId: Int): View? {
@@ -63,10 +62,6 @@ interface AppBarProvider {
 
     fun removeViewFromCollapsingView(view: View?) {
         getAppBarProviderImp().removeViewFromCollapsingView(view)
-    }
-
-    fun setHomeAsUpIndicator(drawableResource: Int) {
-        getAppBarProviderImp().setHomeAsUpIndicator(getSupportActionBar(), drawableResource)
     }
 
     fun setToolbarTitle(title: String) {

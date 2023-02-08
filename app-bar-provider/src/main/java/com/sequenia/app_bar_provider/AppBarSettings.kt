@@ -1,12 +1,6 @@
 package com.sequenia.app_bar_provider
 
 interface AppBarSettings {
-    /**
-     * Если передаватьь 0, то используется изображение по умолчанию из темы
-     *
-     * @return id ресурса изображения
-     */
-    fun getHomeAsUpIndicatorResourceId(): Int
 
     fun getFlags(): Int
 

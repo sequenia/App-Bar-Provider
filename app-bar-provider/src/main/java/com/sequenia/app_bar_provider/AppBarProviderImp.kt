@@ -88,10 +88,6 @@ open class AppBarProviderImp(
         appBar?.removeView(view)
     }
 
-    fun setHomeAsUpIndicator(actionBar: ActionBar, drawableResource: Int) {
-        actionBar.setHomeAsUpIndicator(drawableResource)
-    }
-
     fun setToolbarTitle(title: String) {
         toolbar?.title = title
     }
