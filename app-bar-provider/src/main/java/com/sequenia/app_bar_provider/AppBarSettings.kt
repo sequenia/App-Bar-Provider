@@ -1,23 +1,16 @@
 package com.sequenia.app_bar_provider
 
-@JvmDefaultWithoutCompatibility
 interface AppBarSettings {
-    /**
-     * Если передаватьь 0, то используется изображение по умолчанию из темы
-     *
-     * @return id ресурса изображения
-     */
-    fun getHomeAsUpIndicatorRes(): Int = 0
 
-    fun getFlags(): Int = 0
+    fun getFlags(): Int
 
-    fun isBackButtonVisible(): Boolean = false
+    fun isBackButtonVisible(): Boolean
 
-    fun needScrollToolbar(): Boolean = false
+    fun needScrollToolbar(): Boolean
 
-    fun setToolbarVisibility(): Boolean = true
+    fun setToolbarVisibility(): Boolean
 
-    fun setAppBarVisibility(): Boolean = true
+    fun setAppBarVisibility(): Boolean
 
-    fun getCustomToolbarLayout(): Int = -1
+    fun getCustomToolbarLayout(): Int
 }
