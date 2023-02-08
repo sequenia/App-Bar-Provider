@@ -91,7 +91,6 @@ dependencies {
 - показать/скрыть toolbar
 - показать/скрыть кнопку назад
 - задание customView для toolbar
-- изменение иконки home в toolbar
 - настроить NeedScroll AppBar'а (флаги для настройки передаются)
 - позволяет добавлять view в CollapsingView
 
