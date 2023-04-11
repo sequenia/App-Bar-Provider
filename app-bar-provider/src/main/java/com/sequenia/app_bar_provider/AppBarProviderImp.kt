@@ -91,4 +91,8 @@ open class AppBarProviderImp(
     fun setToolbarTitle(title: String) {
         toolbar?.title = title
     }
+
+    fun setToolbarSubtitle(subtitle: String) {
+        toolbar?.subtitle = subtitle
+    }
 }

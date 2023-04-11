@@ -67,4 +67,8 @@ interface AppBarProvider {
     fun setToolbarTitle(title: String) {
         getAppBarProviderImp().setToolbarTitle(title)
     }
+
+    fun setToolbarSubtitleTitle(subtitle: String) {
+        getAppBarProviderImp().setToolbarSubtitle(subtitle)
+    }
 }
